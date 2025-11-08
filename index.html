@@ -229,6 +229,33 @@
       margin-top: 80px;
     }
 
+    .discord-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .discord-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(191, 0, 255, 0.5), rgba(224, 176, 255, 0.3), rgba(191, 0, 255, 0.5));
+      transition: all 0.4s ease;
+    }
+
+    .discord-btn:hover::before {
+      left: 100%;
+    }
+
+    .discord-btn:hover {
+      box-shadow: 0 0 25px rgba(191, 0, 255, 0.8);
+      border-color: #ff00ff !important;
+      transform: translateY(-3px);
+    }
+
     .motto {
       font-size: 20px;
       color: #ffffff;
@@ -325,6 +352,19 @@
     <div class="motto" id="motto">
      "Transformamos curiosidade em poder, juntos."
     </div>
+
+    <div class="discord-section" style="margin-top: 60px; text-align: center;">
+      <button
+        class="discord-btn bg-gray-800 text-gray-300 border border-gray-700 flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:scale-105 shadow-lg"
+        onclick="window.open('https://discord.gg/qon', '_blank')"
+        style="margin: 0 auto; background: rgba(20, 20, 20, 0.8); border: 2px solid #bf00ff; color: #e0b0ff; font-weight: 500;">
+        <img src="https://www.svgrepo.com/show/353655/discord-icon.svg"
+             alt="Discord"
+             class="discord-icon w-6 h-6">
+        Entrar no servidor do QØN 💜
+      </button>
+    </div>
+
     <div class="copyright">
      <p id="copyright-text">💜 © 2024 Miguel Bennet. Todos os direitos reservados. 💜</p>
     </div>
@@ -340,21 +380,12 @@
         const star = document.createElement('div');
         star.className = 'star';
         
-        // Posição aleatória
         star.style.left = Math.random() * 100 + '%';
         star.style.top = Math.random() * 100 + '%';
         
-        // Algumas estrelas roxas
-        if (Math.random() > 0.7) {
-          star.classList.add('purple');
-        }
+        if (Math.random() > 0.7) star.classList.add('purple');
+        if (Math.random() > 0.8) star.classList.add('large');
         
-        // Algumas estrelas maiores
-        if (Math.random() > 0.8) {
-          star.classList.add('large');
-        }
-        
-        // Delay aleatório na animação
         star.style.animationDelay = Math.random() * 3 + 's';
         star.style.animationDuration = (Math.random() * 2 + 2) + 's';
         
@@ -363,166 +394,6 @@
     }
 
     createStars();
-
-    const defaultConfig = {
-      name: "Miguel Bennet",
-      title: "Criador do QØN",
-      bio_title: "Sobre Mim",
-      bio_text: "Sou Miguel Bennet, fundador e criador do QØN, um servidor Discord que se tornou lar para milhares de pessoas. Minha paixão é construir comunidades digitais onde as pessoas possam se conectar, compartilhar experiências e criar memórias duradouras.",
-      journey_title: "Minha Jornada",
-      motto: "Transformamos curiosidade em poder, juntos.",
-      copyright_text: "© 2024 Miguel Bennet. Todos os direitos reservados.",
-      background_color: "#4a0080",
-      primary_color: "#e0b0ff",
-      text_color: "#ffffff",
-      secondary_text_color: "#e0b0ff",
-      border_color: "rgba(255, 255, 255, 0.2)",
-      font_family: "Segoe UI",
-      font_size: 16
-    };
-
-    async function onConfigChange(config) {
-      const baseFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = `${baseFont}, Tahoma, Geneva, Verdana, sans-serif`;
-      const baseSize = config.font_size || defaultConfig.font_size;
-
-      document.body.style.fontFamily = baseFontStack;
-      document.body.style.color = config.text_color || defaultConfig.text_color;
-
-      const name = document.getElementById('name');
-      name.textContent = config.name || defaultConfig.name;
-      name.style.fontSize = `${baseSize * 3.5}px`;
-      name.style.color = config.text_color || defaultConfig.text_color;
-
-      const title = document.getElementById('title');
-      title.textContent = config.title || defaultConfig.title;
-      title.style.fontSize = `${baseSize * 1.25}px`;
-      title.style.color = config.primary_color || defaultConfig.primary_color;
-
-      const bioTitle = document.getElementById('bio-title');
-      bioTitle.textContent = config.bio_title || defaultConfig.bio_title;
-      bioTitle.style.fontSize = `${baseSize * 1.75}px`;
-      bioTitle.style.color = config.text_color || defaultConfig.text_color;
-
-      const bioText = document.getElementById('bio-text');
-      bioText.textContent = config.bio_text || defaultConfig.bio_text;
-      bioText.style.fontSize = `${baseSize * 1.125}px`;
-      bioText.style.color = config.secondary_text_color || defaultConfig.secondary_text_color;
-
-      const journeyTitle = document.getElementById('journey-title');
-      journeyTitle.textContent = config.journey_title || defaultConfig.journey_title;
-      journeyTitle.style.fontSize = `${baseSize * 1.75}px`;
-      journeyTitle.style.color = config.text_color || defaultConfig.text_color;
-
-      const motto = document.getElementById('motto');
-      motto.textContent = config.motto || defaultConfig.motto;
-      motto.style.fontSize = `${baseSize * 1.25}px`;
-      motto.style.color = config.text_color || defaultConfig.text_color;
-
-      const copyrightText = document.getElementById('copyright-text');
-      copyrightText.textContent = config.copyright_text || defaultConfig.copyright_text;
-      copyrightText.style.fontSize = `${baseSize * 0.875}px`;
-      copyrightText.style.color = config.secondary_text_color || defaultConfig.secondary_text_color;
-
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const secondaryTextColor = config.secondary_text_color || defaultConfig.secondary_text_color;
-      const borderColor = config.border_color || defaultConfig.border_color;
-
-      document.querySelectorAll('.journey-year').forEach(el => {
-        el.style.color = primaryColor;
-        el.style.fontSize = `${baseSize}px`;
-      });
-
-      document.querySelectorAll('.journey-item h3').forEach(el => {
-        el.style.fontSize = `${baseSize * 1.5}px`;
-        el.style.color = textColor;
-      });
-
-      document.querySelectorAll('.journey-item p').forEach(el => {
-        el.style.fontSize = `${baseSize}px`;
-        el.style.color = secondaryTextColor;
-      });
-
-      document.querySelectorAll('.journey-item').forEach(el => {
-        el.style.borderTopColor = borderColor;
-      });
-
-      const footer = document.querySelector('footer');
-      if (footer) {
-        footer.style.borderTopColor = borderColor;
-      }
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities: (config) => ({
-          recolorables: [
-            {
-              get: () => config.background_color || defaultConfig.background_color,
-              set: (value) => {
-                config.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            },
-            {
-              get: () => config.primary_color || defaultConfig.primary_color,
-              set: (value) => {
-                config.primary_color = value;
-                window.elementSdk.setConfig({ primary_color: value });
-              }
-            },
-            {
-              get: () => config.text_color || defaultConfig.text_color,
-              set: (value) => {
-                config.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            },
-            {
-              get: () => config.secondary_text_color || defaultConfig.secondary_text_color,
-              set: (value) => {
-                config.secondary_text_color = value;
-                window.elementSdk.setConfig({ secondary_text_color: value });
-              }
-            },
-            {
-              get: () => config.border_color || defaultConfig.border_color,
-              set: (value) => {
-                config.border_color = value;
-                window.elementSdk.setConfig({ border_color: value });
-              }
-            }
-          ],
-          borderables: [],
-          fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
-            set: (value) => {
-              config.font_family = value;
-              window.elementSdk.setConfig({ font_family: value });
-            }
-          },
-          fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
-            set: (value) => {
-              config.font_size = value;
-              window.elementSdk.setConfig({ font_size: value });
-            }
-          }
-        }),
-        mapToEditPanelValues: (config) => new Map([
-          ["name", config.name || defaultConfig.name],
-          ["title", config.title || defaultConfig.title],
-          ["bio_title", config.bio_title || defaultConfig.bio_title],
-          ["bio_text", config.bio_text || defaultConfig.bio_text],
-          ["journey_title", config.journey_title || defaultConfig.journey_title],
-          ["motto", config.motto || defaultConfig.motto],
-          ["copyright_text", config.copyright_text || defaultConfig.copyright_text]
-        ])
-      });
-    }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99b8d07cb6697e1e',t:'MTc2MjY0NDE2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ </body>
 </html>
