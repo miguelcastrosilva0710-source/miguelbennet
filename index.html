@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miguel Bennet</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #4a0080, #7b2cbf, #9d4edd, #7b2cbf, #4a0080);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #ffffff;
+      min-height: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(157, 78, 221, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(199, 125, 255, 0.3) 0%, transparent 50%);
+      animation: floatingOrbs 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .star.purple {
+      background: #e0b0ff;
+      box-shadow: 0 0 4px rgba(224, 176, 255, 0.9);
+    }
+
+    .star.large {
+      width: 3px;
+      height: 3px;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 1);
+    }
+
+    @keyframes floatingOrbs {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { 
+        opacity: 0.3;
+        transform: scale(1);
+      }
+      50% { 
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px 80px;
+      margin-bottom: 100px;
+    }
+
+    .profile-logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 40px;
+      display: block;
+      border: 4px solid #bf00ff;
+      box-shadow: 0 0 40px rgba(191, 0, 255, 0.8), 0 0 60px rgba(191, 0, 255, 0.6);
+      object-fit: cover;
+    }
+
+    .name {
+      font-size: 56px;
+      font-weight: 300;
+      margin-bottom: 15px;
+      color: #ffffff;
+      letter-spacing: 2px;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    }
+
+    .title {
+      font-size: 20px;
+      color: #e0b0ff;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .bio-section {
+      padding: 0 20px;
+      margin-bottom: 120px;
+    }
+
+    .bio-section h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #ffffff;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    .bio-section p {
+      font-size: 18px;
+      line-height: 2;
+      color: #ffffff;
+      font-weight: 300;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(123, 44, 191, 0.7);
+      padding: 40px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 3px solid #bf00ff;
+      box-shadow: 0 0 60px rgba(191, 0, 255, 1), 0 0 80px rgba(191, 0, 255, 0.8), 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .journey-section {
+      margin-bottom: 120px;
+    }
+
+    .journey-title {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 80px;
+      color: #ffffff;
+      font-weight: 300;
+    }
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 60px;
+      padding: 0 20px;
+    }
+
+    .journey-item {
+      text-align: center;
+      padding: 40px;
+      background: rgba(123, 44, 191, 0.7);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 3px solid #bf00ff;
+      box-shadow: 0 0 60px rgba(191, 0, 255, 1), 0 0 80px rgba(191, 0, 255, 0.8), 0 8px 32px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .journey-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 80px rgba(191, 0, 255, 1), 0 0 100px rgba(191, 0, 255, 1), 0 12px 40px rgba(0, 0, 0, 0.6);
+      border-color: #ff00ff;
+    }
+
+    .journey-year {
+      font-size: 16px;
+      font-weight: 600;
+      color: #e0b0ff;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+    }
+
+    .journey-item h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      font-weight: 400;
+    }
+
+    .journey-item p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #ffffff;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 80px 20px 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 80px;
+    }
+
+    .motto {
+      font-size: 20px;
+      color: #ffffff;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    .copyright p {
+      font-size: 14px;
+      color: #e0b0ff;
+      margin: 0;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .name {
+        font-size: 40px;
+      }
+
+      .title {
+        font-size: 16px;
+      }
+
+      .bio-section h2,
+      .journey-title {
+        font-size: 24px;
+      }
+
+      .bio-section p {
+        font-size: 16px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="stars" id="stars"></div>
+  <div class="container">
+   <header><img src="https://i.imgur.com/hfQlFJD.gif" alt="Logo QØN" class="profile-logo" onerror="this.style.display='none';">
+    <h1 class="name" id="name">Miguel Bennet</h1>
+    <p class="title" id="title">Founder of QØN 💜</p>
+   </header>
+   <section class="bio-section">
+    <h2 id="bio-title">Sobre Mim</h2>
+    <p id="bio-text">Sou Miguel Bennet, CEO do QØN, um servidor Discord que se tornou lar para milhares de pessoas. Minha paixão é construir comunidades digitais onde as pessoas possam se conectar, compartilhar experiências e criar memórias duradouras.</p>
+   </section>
+   <section class="journey-section">
+    <h2 class="journey-title" id="journey-title">Minha Jornada</h2>
+    <div class="journey-grid">
+     <div class="journey-item">
+      <div class="journey-year">
+       2 de jan. de 2024
+      </div>
+      <h3>O Início</h3>
+      <p>Entrei no Discord, sem propósito algum, somente para conversar com amigos e interagir...</p>
+     </div>
+     <div class="journey-item">
+      <div class="journey-year">
+       2025
+      </div>
+      <h3>Crescimento</h3>
+      <p>Eu comecei a ser reconhecido pelo Discord por ser administrador de vários servidores. Pulando de um em um, ajudando comunidades.</p>
+     </div>
+     <div class="journey-item">
+      <div class="journey-year">
+       15 de ago. de 2025
+      </div>
+      <h3>Expansão</h3>
+      <p>Depois de eu conhecer um amigo, chamado Otávio. Eu disse a ele que eu poderia ajudar ele em algo no servidor. Configurações e tudo. Eu acabei virando o dono para poder configurar e nunca mais saí do cargo... Sendo o atual dono do QØN.</p>
+     </div>
+     <div class="journey-item">
+      <div class="journey-year">
+       2025
+      </div>
+      <h3>Consolidação</h3>
+      <p>Continuei ajudando comunidades do Discord em suas jornadas, mas me concentrando mais no QØN.</p>
+     </div>
+     <div class="journey-item">
+      <div class="journey-year">
+       2025
+      </div>
+      <h3>Legado</h3>
+      <p>Tiro férias a cada 2 meses, mas sempre me concentrando no QØN e em comunidades em que sou administrador. Sendo cada vez mais reconhecido por pessoas do Discord.</p>
+     </div>
+    </div>
+   </section>
+   <footer>
+    <div class="motto" id="motto">
+     "Transformamos curiosidade em poder, juntos."
+    </div>
+    <div class="copyright">
+     <p id="copyright-text">💜 © 2024 Miguel Bennet. Todos os direitos reservados. 💜</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Criar estrelas
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      const numberOfStars = 150;
+
+      for (let i = 0; i < numberOfStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        // Posição aleatória
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        
+        // Algumas estrelas roxas
+        if (Math.random() > 0.7) {
+          star.classList.add('purple');
+        }
+        
+        // Algumas estrelas maiores
+        if (Math.random() > 0.8) {
+          star.classList.add('large');
+        }
+        
+        // Delay aleatório na animação
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        
+        starsContainer.appendChild(star);
+      }
+    }
+
+    createStars();
+
+    const defaultConfig = {
+      name: "Miguel Bennet",
+      title: "Criador do QØN",
+      bio_title: "Sobre Mim",
+      bio_text: "Sou Miguel Bennet, fundador e criador do QØN, um servidor Discord que se tornou lar para milhares de pessoas. Minha paixão é construir comunidades digitais onde as pessoas possam se conectar, compartilhar experiências e criar memórias duradouras.",
+      journey_title: "Minha Jornada",
+      motto: "Transformamos curiosidade em poder, juntos.",
+      copyright_text: "© 2024 Miguel Bennet. Todos os direitos reservados.",
+      background_color: "#4a0080",
+      primary_color: "#e0b0ff",
+      text_color: "#ffffff",
+      secondary_text_color: "#e0b0ff",
+      border_color: "rgba(255, 255, 255, 0.2)",
+      font_family: "Segoe UI",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const baseFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = `${baseFont}, Tahoma, Geneva, Verdana, sans-serif`;
+      const baseSize = config.font_size || defaultConfig.font_size;
+
+      document.body.style.fontFamily = baseFontStack;
+      document.body.style.color = config.text_color || defaultConfig.text_color;
+
+      const name = document.getElementById('name');
+      name.textContent = config.name || defaultConfig.name;
+      name.style.fontSize = `${baseSize * 3.5}px`;
+      name.style.color = config.text_color || defaultConfig.text_color;
+
+      const title = document.getElementById('title');
+      title.textContent = config.title || defaultConfig.title;
+      title.style.fontSize = `${baseSize * 1.25}px`;
+      title.style.color = config.primary_color || defaultConfig.primary_color;
+
+      const bioTitle = document.getElementById('bio-title');
+      bioTitle.textContent = config.bio_title || defaultConfig.bio_title;
+      bioTitle.style.fontSize = `${baseSize * 1.75}px`;
+      bioTitle.style.color = config.text_color || defaultConfig.text_color;
+
+      const bioText = document.getElementById('bio-text');
+      bioText.textContent = config.bio_text || defaultConfig.bio_text;
+      bioText.style.fontSize = `${baseSize * 1.125}px`;
+      bioText.style.color = config.secondary_text_color || defaultConfig.secondary_text_color;
+
+      const journeyTitle = document.getElementById('journey-title');
+      journeyTitle.textContent = config.journey_title || defaultConfig.journey_title;
+      journeyTitle.style.fontSize = `${baseSize * 1.75}px`;
+      journeyTitle.style.color = config.text_color || defaultConfig.text_color;
+
+      const motto = document.getElementById('motto');
+      motto.textContent = config.motto || defaultConfig.motto;
+      motto.style.fontSize = `${baseSize * 1.25}px`;
+      motto.style.color = config.text_color || defaultConfig.text_color;
+
+      const copyrightText = document.getElementById('copyright-text');
+      copyrightText.textContent = config.copyright_text || defaultConfig.copyright_text;
+      copyrightText.style.fontSize = `${baseSize * 0.875}px`;
+      copyrightText.style.color = config.secondary_text_color || defaultConfig.secondary_text_color;
+
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const secondaryTextColor = config.secondary_text_color || defaultConfig.secondary_text_color;
+      const borderColor = config.border_color || defaultConfig.border_color;
+
+      document.querySelectorAll('.journey-year').forEach(el => {
+        el.style.color = primaryColor;
+        el.style.fontSize = `${baseSize}px`;
+      });
+
+      document.querySelectorAll('.journey-item h3').forEach(el => {
+        el.style.fontSize = `${baseSize * 1.5}px`;
+        el.style.color = textColor;
+      });
+
+      document.querySelectorAll('.journey-item p').forEach(el => {
+        el.style.fontSize = `${baseSize}px`;
+        el.style.color = secondaryTextColor;
+      });
+
+      document.querySelectorAll('.journey-item').forEach(el => {
+        el.style.borderTopColor = borderColor;
+      });
+
+      const footer = document.querySelector('footer');
+      if (footer) {
+        footer.style.borderTopColor = borderColor;
+      }
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_text_color || defaultConfig.secondary_text_color,
+              set: (value) => {
+                config.secondary_text_color = value;
+                window.elementSdk.setConfig({ secondary_text_color: value });
+              }
+            },
+            {
+              get: () => config.border_color || defaultConfig.border_color,
+              set: (value) => {
+                config.border_color = value;
+                window.elementSdk.setConfig({ border_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["name", config.name || defaultConfig.name],
+          ["title", config.title || defaultConfig.title],
+          ["bio_title", config.bio_title || defaultConfig.bio_title],
+          ["bio_text", config.bio_text || defaultConfig.bio_text],
+          ["journey_title", config.journey_title || defaultConfig.journey_title],
+          ["motto", config.motto || defaultConfig.motto],
+          ["copyright_text", config.copyright_text || defaultConfig.copyright_text]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99b8d07cb6697e1e',t:'MTc2MjY0NDE2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
