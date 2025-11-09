@@ -349,51 +349,18 @@
     </div>
    </section>
    <footer>
-    <div class="motto" id="motto">
-     "Transformamos curiosidade em poder, juntos."
-    </div>
+<div class="motto" id="motto">
+  "Transformamos curiosidade em poder, juntos."
+</div>
 
-    <div class="discord-section" style="margin-top: 60px; text-align: center;">
-      <button
-        class="discord-btn bg-gray-800 text-gray-300 border border-gray-700 flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:scale-105 shadow-lg"
-        onclick="window.open('https://discord.gg/qon', '_blank')"
-        style="margin: 0 auto; background: rgba(20, 20, 20, 0.8); border: 2px solid #bf00ff; color: #e0b0ff; font-weight: 500;">
-        <img src="https://www.svgrepo.com/show/353655/discord-icon.svg"
-             alt="Discord"
-             class="discord-icon w-6 h-6">
-        Entrar no servidor do QØN 💜
-      </button>
-    </div>
-
-    <div class="copyright">
-     <p id="copyright-text">💜 © 2024 Miguel Bennet. Todos os direitos reservados. 💜</p>
-    </div>
-   </footer>
-  </div>
-  <script>
-    // Criar estrelas
-    function createStars() {
-      const starsContainer = document.getElementById('stars');
-      const numberOfStars = 150;
-
-      for (let i = 0; i < numberOfStars; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        
-        if (Math.random() > 0.7) star.classList.add('purple');
-        if (Math.random() > 0.8) star.classList.add('large');
-        
-        star.style.animationDelay = Math.random() * 3 + 's';
-        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        
-        starsContainer.appendChild(star);
-      }
-    }
-
-    createStars();
-  </script>
- </body>
-</html>
+<div class="discord-section" style="margin: 20px auto 60px; display: flex; justify-content: center;">
+  <button
+    class="discord-btn bg-gray-800 text-gray-300 border border-gray-700 flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:scale-105 shadow-lg"
+    onclick="window.open('https://discord.gg/qon', '_blank')"
+    style="background: rgba(20, 20, 20, 0.8); border: 2px solid #bf00ff; color: #e0b0ff; font-weight: 500;">
+    <img src="https://www.svgrepo.com/show/353655/discord-icon.svg"
+         alt="Discord"
+         class="discord-icon w-6 h-6">
+    Entrar no servidor do QØN 💜
+  </button>
+</div>
