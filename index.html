@@ -87,6 +87,10 @@
       }
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     .container {
       max-width: 800px;
       margin: 0 auto;
@@ -202,6 +206,22 @@
       letter-spacing: 3px;
     }
 
+    .journey-item h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      font-weight: 400;
+    }
+
+    .journey-item p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #ffffff;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     footer {
       text-align: center;
       padding: 80px 20px 60px;
@@ -209,133 +229,149 @@
       margin-top: 80px;
     }
 
-    /* Conquistas */
-    .achievements-section h2 {
-      font-size: 28px;
-      text-align: center;
-      margin-bottom: 40px;
+    .discord-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .discord-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(191, 0, 255, 0.5), rgba(224, 176, 255, 0.3), rgba(191, 0, 255, 0.5));
+      transition: all 0.4s ease;
+    }
+
+    .discord-btn:hover::before {
+      left: 100%;
+    }
+
+    .discord-btn:hover {
+      box-shadow: 0 0 25px rgba(191, 0, 255, 0.8);
+      border-color: #ff00ff !important;
+      transform: translateY(-3px);
+    }
+
+    .motto {
+      font-size: 20px;
       color: #ffffff;
       font-weight: 300;
+      font-style: italic;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
     }
 
-    .achievement-box {
-      background: rgba(123, 44, 191, 0.7);
-      border: 3px solid #bf00ff;
-      border-radius: 15px;
-      padding: 40px;
-      margin-bottom: 40px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 60px rgba(191, 0, 255, 1), 0 0 80px rgba(191, 0, 255, 0.8), 0 8px 32px rgba(0, 0, 0, 0.5);
+    .copyright p {
+      font-size: 14px;
+      color: #e0b0ff;
+      margin: 0;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0.8;
     }
 
-    .achievement-box h3 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #ffffff;
-    }
+    @media (max-width: 768px) {
+      .name {
+        font-size: 40px;
+      }
 
-    .achievement-box p {
-      color: #e8d6ff;
-      font-size: 16px;
-      line-height: 1.7;
+      .title {
+        font-size: 16px;
+      }
+
+      .bio-section h2,
+      .journey-title {
+        font-size: 24px;
+      }
+
+      .bio-section p {
+        font-size: 16px;
+      }
     }
   </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
-
  <body>
   <div class="stars" id="stars"></div>
-
   <div class="container">
-
-   <header>
-     <img src="https://i.imgur.com/hfQlFJD.gif" class="profile-logo">
-     <h1 class="name">Miguel Bennet</h1>
-     <p class="title">Founder of QØN 💜</p>
+   <header><img src="https://i.imgur.com/hfQlFJD.gif" alt="Logo QØN" class="profile-logo" onerror="this.style.display='none';">
+    <h1 class="name" id="name">Miguel Bennet</h1>
+    <p class="title" id="title">Founder of QØN 💜</p>
    </header>
-
    <section class="bio-section">
-    <h2>Sobre Mim</h2>
-    <p>Sou Miguel Bennet, CEO do QØN...</p>
+    <h2 id="bio-title">Sobre Mim</h2>
+    <p id="bio-text">Sou Miguel Bennet, CEO do QØN, um servidor Discord que se tornou lar para milhares de pessoas. Minha paixão é construir comunidades digitais onde as pessoas possam se conectar, compartilhar experiências e criar memórias duradouras.</p>
    </section>
-
    <section class="journey-section">
-    <h2 class="journey-title">Minha Jornada</h2>
-
-    <!-- teus itens da jornada seguem iguais -->
+    <h2 class="journey-title" id="journey-title">Minha Jornada</h2>
     <div class="journey-grid">
-
      <div class="journey-item">
-      <div class="journey-year">2 de jan. de 2024</div>
+      <div class="journey-year">
+       2 de jan. de 2024
+      </div>
       <h3>O Início</h3>
-      <p>Entrei no Discord...</p>
+      <p>Entrei no Discord, sem propósito algum, somente para conversar com amigos e interagir...</p>
      </div>
-
      <div class="journey-item">
-      <div class="journey-year">2025</div>
+      <div class="journey-year">
+       2025
+      </div>
       <h3>Crescimento</h3>
-      <p>Comecei a ser reconhecido...</p>
+      <p>Eu comecei a ser reconhecido pelo Discord por ser administrador de vários servidores. Pulando de um em um, ajudando comunidades.</p>
      </div>
-
      <div class="journey-item">
-      <div class="journey-year">15 de ago. de 2025</div>
+      <div class="journey-year">
+       15 de ago. de 2025
+      </div>
       <h3>Expansão</h3>
-      <p>Conheci o Otávio...</p>
+      <p>Depois de eu conhecer um amigo, chamado Otávio. Eu disse a ele que eu poderia ajudar ele em algo no servidor. Configurações e tudo. Eu acabei virando o dono para poder configurar e nunca mais saí do cargo... Sendo o atual dono do QØN.</p>
      </div>
-
      <div class="journey-item">
-      <div class="journey-year">2025</div>
+      <div class="journey-year">
+       2025
+      </div>
       <h3>Consolidação</h3>
-      <p>Continuei ajudando comunidades...</p>
+      <p>Continuei ajudando comunidades do Discord em suas jornadas, mas me concentrando mais no QØN.</p>
      </div>
-
      <div class="journey-item">
-      <div class="journey-year">2025</div>
+      <div class="journey-year">
+       2025
+      </div>
       <h3>Legado</h3>
-      <p>Tiro férias a cada 2 meses...</p>
+      <p>Tiro férias a cada 2 meses, mas sempre me concentrando no QØN e em comunidades em que sou administrador. Sendo cada vez mais reconhecido por pessoas do Discord.</p>
      </div>
-
     </div>
    </section>
-
-   <!-- AQUI ESTÁ A SEÇÃO DE CONQUISTAS -->
-   <section class="achievements-section">
-    <h2>Conquistas</h2>
-
-    <div class="achievement-box">
-      <h3>Servidor com mais de 3.000 membros</h3>
-      <p>Transformei o QØN em uma comunidade ativa, acolhedora e em constante evolução.</p>
-    </div>
-
-    <div class="achievement-box">
-      <h3>Reconhecimento na comunidade Discord</h3>
-      <p>Administrei diversos servidores e ajudei centenas de pessoas a estruturarem seus espaços.</p>
-    </div>
-
-    <div class="achievement-box">
-      <h3>Criação de sistemas e automações</h3>
-      <p>Desenvolvi mecânicas, fluxos e padronizações que elevaram a experiência do servidor.</p>
-    </div>
-   </section>
-
    <footer>
-    <div class="motto">"Transformamos curiosidade em poder, juntos."</div>
+<div class="motto" id="motto">
+  "Transformamos curiosidade em poder, juntos."
+</div>
 
-    <div style="margin: 20px auto 60px; display: flex; justify-content: center;">
-      <button class="discord-btn flex items-center justify-center gap-2 px-6 py-4 rounded-lg w-full max-w-[600px]"
-        onclick="window.open('https://discord.gg/qon', '_blank')"
-        style="background: rgba(20, 20, 20, 0.85); border: 3px solid #bf00ff; color: #e0b0ff; font-weight: 600; font-size: 18px;">
-        <img src="https://www.svgrepo.com/show/353655/discord-icon.svg" class="w-7 h-7">
-        Entrar no servidor do QØN 💜
-      </button>
+<div class="discord-section" style="margin: 20px auto 60px; display: flex; justify-content: center;">
+  <button
+    class="discord-btn bg-gray-800 text-gray-300 border border-gray-700 flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:scale-105 shadow-lg"
+    onclick="window.open('https://discord.gg/qon', '_blank')"
+    style="background: rgba(20, 20, 20, 0.8); border: 2px solid #bf00ff; color: #e0b0ff; font-weight: 500;">
+    <img src="https://www.svgrepo.com/show/353655/discord-icon.svg"
+         alt="Discord"
+         class="discord-icon w-6 h-6">
+    Entrar no servidor do QØN 💜
+  </button>
+</div>
+
+    <div class="copyright">
+     <p id="copyright-text">💜 © 2024 Miguel Bennet. Todos os direitos reservados. 💜</p>
     </div>
-
-    <p>© 2024 Miguel Bennet. Todos os direitos reservados.</p>
    </footer>
-
   </div>
-
   <script>
+    // Criar estrelas
     function createStars() {
       const starsContainer = document.getElementById('stars');
       const numberOfStars = 150;
@@ -351,6 +387,7 @@
         if (Math.random() > 0.8) star.classList.add('large');
         
         star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
         
         starsContainer.appendChild(star);
       }
@@ -358,10 +395,5 @@
 
     createStars();
   </script>
-
  </body>
 </html>
-
-
-
-
